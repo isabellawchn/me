@@ -127,7 +127,7 @@ def loops_2():
     """
     star_square = [] 
     for i in range(10):
-        star_square.append(loops_2(number_of_items=10), symbol ="*")) 
+        star_square.append(loops_2(number_of_items=10), symbol ="*")
         return star_square
 
 
@@ -271,7 +271,16 @@ def loops_7():
     This is a hard problem. Use lots of experimentation and draw
     lots of diagrams!
     """
-    return None
+    numberfield = []
+    for i in range(5):
+        number = []
+        for j in range(9):
+            if j < 5 + i and j > 3 - i:
+                number.append('*')
+            else:
+                number.append(' ')
+        numberfield.append(number)
+    return numberfield
 
 
 if __name__ == "__main__":
