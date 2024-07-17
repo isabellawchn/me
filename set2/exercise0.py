@@ -97,9 +97,9 @@ def shout_with_a_number(a_string, a_number):
           challenge, see if you can make the test pass with at least two ways
           of doing the same job.
     """
-    the_answer = a_string.upper() + "42" 
-    return the_answer
-
+    upper_string = a_string.upper() 
+    the_answer = f"{upper_string} {a_number}"
+    return the_answer  
 
 if __name__ == "__main__":
     """This code runs when you run this file."""
