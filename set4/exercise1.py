@@ -32,15 +32,21 @@ def get_some_details():
          E.g. 2000 + 3000 = 5000 not 20003000
     TIP: Keep a close eye on the format you get back. JSON is nested, so you
          might need to go deep. E.g to get the name title you would need to:
-         data["results"][0]["name"]["title"]
-         Look out for the type of brackets. [] means list and {} means
+         data["results"][io0]["name"]["title"]
+         Look out for the[[[[[[[[[ ]]]]]]]]] type of brackets. [] means list and {} means
          dictionary, you'll need integer indeces for lists, and named keys for
          dictionaries.
     """
     json_data = open(LOCAL + "/lazyduck.json").read()
-
     data = json.loads(json_data)
-    return {"lastName": None, "password": None, "postcodePlusID": None}
+
+    last_name = data["results"][0]["name"]["title"]["last"]
+    password = data["results"][0]["login"]["password"]
+    postcode = data["results"][0]["location"]["postcode"]
+    ID = data["results"][0]["id"]
+    postcodePlusID = f"{postcode} + {ID}"
+    
+    return {"lastName": last_name , "password": password , "postcodePlusID": postcodePlusID}
 
 
 def wordy_pyramid():
@@ -79,6 +85,19 @@ def wordy_pyramid():
     """
     pyramid = []
 
+    for i in range(3, 21, 2): 
+        url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={i}" 
+        response = requests.get(url) 
+        if response.status_code == 200: 
+            word = response.text 
+            pyramid.append(word)
+
+    for i in range(20, 3, -2): 
+        url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={i}" 
+        response = requests.get(url) 
+        if response.status_code == 200: 
+            word = response.text 
+            pyramid.append(word)
     return pyramid
 
 
@@ -96,13 +115,26 @@ def pokedex(low=1, high=5):
          get very long. If you are accessing a thing often, assign it to a
          variable and then future access will be easier.
     """
-    id = 5
-    url = f"https://pokeapi.co/api/v2/pokemon/{id}"
-    r = requests.get(url)
-    if r.status_code is 200:
-        the_json = json.loads(r.text)
+    tallest = 0
+    name = ""
+    weight = 0
+    height = 0
+    
+    for id in range(low, high + 1):
+        url = f"https://pokeapi.co/api/v2/pokemon/{id}"
+        r = requests.get(url)
+        
+        if r.status_code == 200:
+            pokemon_data = json.loads(r.text)
+            pokemon_height = pokemon_data["height"]
+            
+            if pokemon_height > tallest:
+                tallest = pokemon_height
+                name = pokemon_data["forms"][0]["name"]
+                weight = pokemon_data["weight"]
+                height = pokemon_height
 
-    return {"name": None, "weight": None, "height": None}
+    return {"name": name, "weight": weight, "height": tallest}
 
 
 def diarist():
