@@ -108,8 +108,8 @@ def fizz_buzz() -> list:
          'Fizz', 'Buzz',  11, 'Fizz', 13, 14,
          'FizzBuzz', 16, 17, ...]
     """
+    url = "https://blog.codinghorror.com/why-cant-programmers-program/" 
     fizz_buzz_list = []
-    
     return fizz_buzz_list
 
 
@@ -124,8 +124,10 @@ def set_it_on_fire(input_string="very naughty boy") -> str:
     TIP: consider using the 'join' method in Python.
     TIP: make sure that you have a 🔥 on both ends of the string.
     """
-
-    return None
+    input_string_upper = input_string.upper() 
+    interlaced_string = '🔥'.join(input_string_upper) 
+    final_string = f"🔥{interlaced_string}🔥"
+    return final_string 
 
 
 def the_chain_gang_5(the_value) -> bool:
@@ -138,8 +140,8 @@ def the_chain_gang_5(the_value) -> bool:
     TIP: you've already written a function that returns True if the value is 5
     TIP: you've already written a function that subtracts 5
     """
-
-    return None
+    num = the_value % 5 is 0
+    return num 
 
 
 def pet_filter(letter="a") -> list:
@@ -156,8 +158,7 @@ def pet_filter(letter="a") -> list:
         "fancy rat and lab rat", "mink", "red fox", "hedgehog", "guppy"
     ]
     # fmt: on
-    filtered = []
-
+    filtered = [pet for pet in pets if letter in pet]
     return filtered
 
 
@@ -173,7 +174,6 @@ def best_letter_for_pets() -> str:
 
     the_alphabet = string.ascii_lowercase
     most_popular_letter = ""
-
     return most_popular_letter
 
 
