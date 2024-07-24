@@ -40,10 +40,10 @@ def get_some_details():
     json_data = open(LOCAL + "/lazyduck.json").read()
     data = json.loads(json_data)
 
-    last_name = data["results"][0]["name"]["title"]["last"]
+    last_name = data["results"][0]["name"]["last"]
     password = data["results"][0]["login"]["password"]
     postcode = data["results"][0]["location"]["postcode"]
-    ID = data["results"][0]["id"]
+    ID = data["results"][0]["id"]["value"]
     postcodePlusID = int(postcode) + int(ID)
     
     return {"lastName": last_name , "password": password , "postcodePlusID": postcodePlusID}
