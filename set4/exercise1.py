@@ -44,7 +44,7 @@ def get_some_details():
     password = data["results"][0]["login"]["password"]
     postcode = data["results"][0]["location"]["postcode"]
     ID = data["results"][0]["id"]
-    postcodePlusID = f"{postcode} + {ID}"
+    postcodePlusID = int(postcode) + int(ID)
     
     return {"lastName": last_name , "password": password , "postcodePlusID": postcodePlusID}
 
