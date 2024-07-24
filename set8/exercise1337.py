@@ -108,8 +108,18 @@ def fizz_buzz() -> list:
          'Fizz', 'Buzz',  11, 'Fizz', 13, 14,
          'FizzBuzz', 16, 17, ...]
     """
-    url = "https://blog.codinghorror.com/why-cant-programmers-program/" 
     fizz_buzz_list = []
+    
+    for num in range(1, 101):
+        if num % 3 == 0 and num % 5 == 0:
+            fizz_buzz_list.append("FizzBuzz")
+        elif num % 3 == 0:
+            fizz_buzz_list.append("Fizz")
+        elif num % 5 == 0:
+            fizz_buzz_list.append("Buzz")
+        else:
+            fizz_buzz_list.append(num)
+    
     return fizz_buzz_list
 
 
