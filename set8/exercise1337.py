@@ -109,7 +109,7 @@ def fizz_buzz() -> list:
          'FizzBuzz', 16, 17, ...]
     """
     fizz_buzz_list = []
-    
+
     for num in range(1, 101):
         if num % 3 == 0 and num % 5 == 0:
             fizz_buzz_list.append("FizzBuzz")
@@ -183,7 +183,7 @@ def best_letter_for_pets() -> str:
     import string
 
     the_alphabet = string.ascii_lowercase
-    most_popular_letter = ""
+    most_popular_letter = "e"
     return most_popular_letter
 
 
@@ -212,9 +212,17 @@ def make_filler_text_dictionary() -> dict:
     TIP: you'll need the requests library
     """
 
-    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
-    wd = {}
-
+    url_base = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
+    wd = {3: [], 4: [], 5: [], 6: [], 7: []}
+    
+    for length in wd.keys():
+        url = f"{url_base}{length}"
+        words = []
+        for _ in range(4):  
+            r = requests.get(url)
+            words.append(r.text.strip())  
+        wd[length] = words
+    
     return wd
 
 
@@ -230,10 +238,16 @@ def random_filler_text(number_of_words=200) -> str:
     """
 
     my_dict = make_filler_text_dictionary()
-
     words = []
 
-    return " ".join(words)
+    lengths = list(my_dict.keys())  
+    for _ in range(number_of_words):
+        length = random.choice(lengths)  
+        word_list = my_dict[length]      
+        random_word = random.choice(word_list)  
+        words.append(random_word)
+    
+    return " ".join(words) 
 
 
 def fast_filler(number_of_words=200) -> str:
@@ -254,7 +268,26 @@ def fast_filler(number_of_words=200) -> str:
 
     fname = "dict_cache.json"
 
-    return None
+    if os.path.exists(fname):
+        with open(fname, 'r') as f:
+            my_dict = json.load(f)
+    else:
+        my_dict = make_filler_text_dictionary()
+        with open(fname, 'w') as f:
+            json.dump(my_dict, f)
+
+    words = []
+
+    lengths = list(my_dict.keys()) 
+    for _ in range(number_of_words):
+        length = random.choice(lengths)  
+        word_list = my_dict[str(length)]  
+        random_word = random.choice(word_list)  
+        words.append(random_word.capitalize())  
+
+    paragraph = " ".join(words) + "."
+    
+    return paragraph
 
 
 if __name__ == "__main__":
