@@ -40,24 +40,28 @@ def int_list_please() -> list[int]:
 
 def string_list_please() -> list[str]:
     """Returns a list of strings, any string are fine."""
-
-    return None
+    list = ["apple, banana, cherry"]
+    return list
 
 
 def dictionary_please() -> dict:
     """Returns a dictionary, anything you like."""
-    return None
+    dict = {"fruit": "apple"}
+    return dict
 
 
 def is_it_5(some_number) -> bool:
     """Returns True if the argument passed is 5, otherwise returns False."""
-    well_is_it = None
-    return well_is_it
+    if some_number == 5:
+        return True
+    else:
+        return False 
 
 
 def take_five(some_number) -> int:
     """Subtracts 5 from some_number."""
-    return None
+    int = some_number - 5 
+    return int
 
 
 def greet(name="Towering Timmy") -> str:
@@ -66,7 +70,7 @@ def greet(name="Towering Timmy") -> str:
     E.g. if given as "Towering Timmy" it should
          return "Well hello, Towering Timmy"
     """
-    return None
+    return f"Well hello, {name}"
 
 
 def one_counter(input_list=[1, 4, 1, 5, 1, 1]) -> int:
@@ -74,18 +78,16 @@ def one_counter(input_list=[1, 4, 1, 5, 1, 1]) -> int:
     Return an integer.
     TIP: the test will use a different input_list, so don't just return 2
     """
-    count = None
-
-    return count
+    count = input_list.count (1)
+    return count 
 
 
 def n_counter(search_for_this, input_list=[1, 4, 1, 5, 1, 1]) -> int:
     """Count the number of times search_for_this shows up in the input_list.
     Return an integer.
     """
-    count = None
-
-    return count
+    count = search_for_this 
+    return input_list.count (search_for_this)
 
 
 def fizz_buzz() -> list:
@@ -107,8 +109,7 @@ def fizz_buzz() -> list:
          'FizzBuzz', 16, 17, ...]
     """
     fizz_buzz_list = []
-    # your code here
-
+    
     return fizz_buzz_list
 
 
